@@ -47,3 +47,45 @@ saveBtn.addEventListener('click', ()=>{
         addQuestionModal.classList.add('hide');
     }
 });
+
+function viewList(){
+    const cardsList = document.querySelector('.cards-list');
+    cardsList.innerHTML = '';
+    flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+    flashcards.forEach(flashcard => {
+        const div = document.createElement("div");
+        div.classList.add('card');
+        div.innerHTML = `
+            <p class="que-div">${flashcard.question}</p>
+            <p class="ans-div">${flashcard.answer}</p>
+            <button class="show-hide-btn">Show/Hide</button>
+            <div class="btns-con">
+                <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="delete"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `;
+
+        div.setAttribute('data-id', flashcard.id);
+        const displayAns = div.querySelector('.ans-div');
+        const showHideBtn = div.querySelector('.show-hide-btn');
+        const editBtn = div.querySelector('.edit');
+        const deleteBtn = div.querySelector('.delete');
+
+        showHideBtn.addEventListener('click', ()=>{
+            displayAns.classList.toggle('hide');
+        });
+
+        editBtn.addEventListener('click', ()=>{
+            editBool = true;
+            modifyElement(editBtn, true);
+            addQuestionModal.classList.remove('hide');
+        });
+
+        deleteBtn.addEventListener('click', ()=>{
+            modifyElement(deleteBtn);
+        });
+
+        cardsList.appendChild(div);
+    });
+}
+
