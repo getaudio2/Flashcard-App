@@ -25,3 +25,25 @@ closeBtn.addEventListener('click', ()=>{
         editBool = false;
     }
 });
+
+saveBtn.addEventListener('click', ()=>{
+    let tempQuestion = question.value.trim();
+    let tempAnswer = answer.value.trim();
+    if(!tempQuestion || !tempAnswer){
+        errorMessage.classList.remove('hide');
+    } else {
+        if(editBool){
+            flashcards = flashcards.filter(flashcard => flashcard.id !== originalId);
+        }
+        let id = Date.now();
+        flashcards.push({ id, question: tempQuestion, answer: tempAnswer});
+        localStorage.setItem('flashcards', JSON.stringify(flashcards));
+        container.classList.remove('hide');
+        errorMessage.classList.add('hide');
+        viewList();
+        question.value = "";
+        answer.value = "";
+        editBool = false;
+        addQuestionModal.classList.add('hide');
+    }
+});
