@@ -89,3 +89,28 @@ function viewList(){
     });
 }
 
+const modifyElement = (element, edit = false) =>{
+    const parentDiv = element.parentElement.parentElement;
+    const id = Number(parentDiv.getAttribute('data-id'));
+    const parentQuestion = parentDiv.querySelector('.que-div').innerText;
+    if(edit){
+        const parentAnswer = parentDiv.querySelector('.ans-div').innerText;
+        answer.value = parentAnswer;
+        question.value = parentQuestion;
+        originalId = id;
+        disableBtns(true);
+    } else {
+        flashcards = flashcards.filter(flashcard => flashcard.id !== id);
+        localStorage.setItem('flashcards', JSON.stringify(flashcards));
+    }
+    parentDiv.remove();
+}
+
+const disableBtns = (value) => {
+    const editButtons = document.getElementsByClassName('edit');
+    Array.from(editButtons).forEach((element) =>{
+        element.disabled = value;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', viewList);
