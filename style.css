@@ -174,3 +174,26 @@ textarea:focus{
 .show-hide-btn:hover {
     background-color: #368639 !important;
 }
+
+@media screen and (max-width: 800px) {
+
+    body {
+        padding: 10px 0 30px;
+    }
+
+    .card {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 572px) {
+
+    body {
+        font-size: 14px;
+        overflow-y: scroll;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
