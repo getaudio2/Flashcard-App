@@ -57,7 +57,7 @@ function viewList(){
         div.classList.add('card');
         div.innerHTML = `
             <p class="que-div">${flashcard.question}</p>
-            <p class="ans-div">${flashcard.answer}</p>
+            <p class="ans-div hide">${flashcard.answer}</p>
             <button class="show-hide-btn">Show/Hide</button>
             <div class="btns-con">
                 <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -87,7 +87,7 @@ function viewList(){
 
         cardsList.appendChild(div);
     });
-}
+};
 
 const modifyElement = (element, edit = false) =>{
     const parentDiv = element.parentElement.parentElement;
@@ -104,13 +104,13 @@ const modifyElement = (element, edit = false) =>{
         localStorage.setItem('flashcards', JSON.stringify(flashcards));
     }
     parentDiv.remove();
-}
+};
 
 const disableBtns = (value) => {
     const editButtons = document.getElementsByClassName('edit');
     Array.from(editButtons).forEach((element) =>{
         element.disabled = value;
     });
-}
+};
 
 document.addEventListener('DOMContentLoaded', viewList);
